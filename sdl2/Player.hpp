@@ -9,7 +9,7 @@
 #define Player_hpp
 
 #include <stdio.h>
-#include "myCommon.hpp"
+#include "MyCommon.hpp"
 
 class Game;
 class MyGameObject : NonCopyable {

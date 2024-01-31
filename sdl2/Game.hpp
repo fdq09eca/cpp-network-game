@@ -9,7 +9,7 @@
 #define Game_hpp
 
 #include <stdio.h>
-#include "myCommon.hpp"
+#include "MyCommon.hpp"
 
 class Player;
 

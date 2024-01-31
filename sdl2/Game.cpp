@@ -46,7 +46,7 @@ void Game::run(){
         endTime = SDL_GetTicks();
     }
     
-    // game.onQuit();
+    
     
     if (renderer)   { SDL_DestroyRenderer(renderer);    }
     if (window)     {   SDL_DestroyWindow(window);      }
@@ -54,8 +54,6 @@ void Game::run(){
 }
 
 void Game::startHost(){
-    // init host
-//    game.onInit();
     auto& p = players.emplace_back(new Player);
     localPlayer = p.get();
 }

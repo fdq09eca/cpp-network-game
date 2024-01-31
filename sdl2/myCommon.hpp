@@ -1,12 +1,12 @@
 //
-//  myCommon.hpp
+//  MyCommon.hpp
 //  sdl2
 //
 //  Created by ChrisLam on 30/01/2024.
 //
 
-#ifndef myCommon_hpp
-#define myCommon_hpp
+#ifndef MyCommon_hpp
+#define MyCommon_hpp
 
 #include <stdio.h>
 #include <vector>
@@ -61,4 +61,4 @@ struct DrawRequest : NonCopyable {
     }
 };
 
-#endif /* myCommon_hpp */
+#endif /* MyCommon_hpp */

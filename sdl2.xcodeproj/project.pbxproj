@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F513C3E72B6975CD00F0EB14 /* myCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F513C3E52B6975CD00F0EB14 /* myCommon.cpp */; };
 		F513C3EA2B69D2FF00F0EB14 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F513C3E82B69D2FF00F0EB14 /* Player.cpp */; };
 		F513C3ED2B69D34100F0EB14 /* MyGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F513C3EB2B69D34100F0EB14 /* MyGameObject.cpp */; };
 		F513C3F02B69D43A00F0EB14 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F513C3EE2B69D43A00F0EB14 /* Game.cpp */; };
 		F57605622B58473C0049E44B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57605612B58473C0049E44B /* main.cpp */; };
+		F5E310C72B6AA233002FFBA6 /* MyCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5E310C62B6AA233002FFBA6 /* MyCommon.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F513C3E52B6975CD00F0EB14 /* myCommon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = myCommon.cpp; sourceTree = "<group>"; };
-		F513C3E62B6975CD00F0EB14 /* myCommon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = myCommon.hpp; sourceTree = "<group>"; };
 		F513C3E82B69D2FF00F0EB14 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		F513C3E92B69D2FF00F0EB14 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		F513C3EB2B69D34100F0EB14 /* MyGameObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MyGameObject.cpp; sourceTree = "<group>"; };
@@ -37,6 +35,8 @@
 		F513C3EF2B69D43A00F0EB14 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		F576055E2B58473C0049E44B /* sdl2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sdl2; sourceTree = BUILT_PRODUCTS_DIR; };
 		F57605612B58473C0049E44B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F5E310C52B6AA233002FFBA6 /* MyCommon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyCommon.hpp; sourceTree = "<group>"; };
+		F5E310C62B6AA233002FFBA6 /* MyCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyCommon.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +76,8 @@
 				F513C3EC2B69D34100F0EB14 /* MyGameObject.hpp */,
 				F513C3E82B69D2FF00F0EB14 /* Player.cpp */,
 				F513C3E92B69D2FF00F0EB14 /* Player.hpp */,
-				F513C3E52B6975CD00F0EB14 /* myCommon.cpp */,
-				F513C3E62B6975CD00F0EB14 /* myCommon.hpp */,
+				F5E310C62B6AA233002FFBA6 /* MyCommon.cpp */,
+				F5E310C52B6AA233002FFBA6 /* MyCommon.hpp */,
 			);
 			path = sdl2;
 			sourceTree = "<group>";
@@ -140,8 +140,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F513C3ED2B69D34100F0EB14 /* MyGameObject.cpp in Sources */,
-				F513C3E72B6975CD00F0EB14 /* myCommon.cpp in Sources */,
 				F57605622B58473C0049E44B /* main.cpp in Sources */,
+				F5E310C72B6AA233002FFBA6 /* MyCommon.cpp in Sources */,
 				F513C3EA2B69D2FF00F0EB14 /* Player.cpp in Sources */,
 				F513C3F02B69D43A00F0EB14 /* Game.cpp in Sources */,
 			);
