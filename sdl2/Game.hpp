@@ -10,17 +10,30 @@
 
 #include <stdio.h>
 #include "MyCommon.hpp"
-
+#include "MySocket.hpp"
 class Player;
 
 class Game {
+private:
+    static Game* _instance;
     
 public:
-
+    Game() {
+        assert(_instance == nullptr);
+        _instance = this;
+    }
+    
+    ~Game() {
+        _instance = nullptr;
+    }
+    
+    MySocket listenSock;
+    
+    
     
     Player* localPlayer = nullptr;
     
-    std::vector<std::unique_ptr<Player>> players; // <==
+    std::vector<std::unique_ptr<Player>> players;
     
     static const int SCREEN_W = 1280;
     static const int SCREEN_H = 720;
@@ -36,32 +49,27 @@ public:
     SDL_Renderer* renderer = nullptr;
     SDL_bool quit = SDL_FALSE;
     
-    void setLocalPlayer(std::unique_ptr<Player>&& p);
     
-    void onInit() {
-        if (SDL_Init(SDL_INIT_VIDEO) != 0
-          ||SDL_CreateWindowAndRenderer(SCREEN_W, SCREEN_H, 0, &window, &renderer) != 0)
-        {
-             throw MyError("Game init failed.");
-        }
-        assert(window && renderer);
-    }
+    static Game* Instance() { return _instance; }
     
+    void onInit();
     
-    
-    
-
     void onUpdate();
 
+    void onUpdateNetwork();
+    
+    void boardcast(Player& p);
     
     void onDraw();
     
+    int getNewPlayerId();
     
-    
-    
+    Player* getPlayerById(int id); // not sure about raw ptr..?
     
     void run();
+    
     void startHost();
+    
     void startClient();
     
     void onEvent(SDL_Event& event);

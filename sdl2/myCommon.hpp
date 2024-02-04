@@ -8,25 +8,8 @@
 #ifndef MyCommon_hpp
 #define MyCommon_hpp
 
-#include <stdio.h>
-#include <vector>
 #include <SDL2/SDL.h>
-
-class MyError : std::exception {
-public:
-    MyError(const char* msg){
-        printf("[ERR] %s", msg);
-    }
-};
-
-class NonCopyable {
-private:
-    NonCopyable(const NonCopyable& ) = delete;
-    void operator=(const NonCopyable& ) = delete;
-
-public:
-    NonCopyable() = default;
-};
+#include "MyUtil.hpp"
 
 
 struct Point {
@@ -48,7 +31,7 @@ struct MyRect {
     inline bool operator== (const MyRect& r) const { return pos == r.pos && r.size == size; }
 };
 
-struct DrawRequest : NonCopyable {
+struct DrawRequest : public NonCopyable {
     SDL_Renderer* renderer = nullptr;
     
     void setColor(const SDL_Color& color) {
@@ -59,6 +42,8 @@ struct DrawRequest : NonCopyable {
         setColor(color);
         SDL_RenderFillRect(renderer, &rect);
     }
+    
+
 };
 
 #endif /* MyCommon_hpp */
