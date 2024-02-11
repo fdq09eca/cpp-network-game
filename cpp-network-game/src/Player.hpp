@@ -40,7 +40,6 @@ public:
     Player()  {
         sendBuff.clear();
         recvBuff.clear();
-        
     }
     
     Player(Player&& rhs) { *this = std::move(rhs); }
@@ -90,9 +89,12 @@ public:
     
     void onConnect(Game& g);
     
+    
+    
     void sendPos();
     
-    void sendState() { MySerialiser::se_Player(*this, sendBuff); }
+    bool canSend() { return !sendBuff.empty(); }
+    bool canRead() { return !canSend(); }
     
     void send(std::vector<uint8_t>& buff){
         MyUtil::appendVector(sendBuff, buff);
@@ -100,7 +102,11 @@ public:
     
     void onSend(){
         // should do more.
-        sock.send(sendBuff.data(), sendBuff.size());
+        size_t n = sock.send(sendBuff.data(), sendBuff.size());
+        
+        
+        fmt::print("\n{} byteSent.", n);
+        sendBuff.clear();
     }
     
     void onRecvCommand();
@@ -113,7 +119,7 @@ public:
         }
         
         assert(remainSize >= 0);
-
+        
         if (remainSize == 0)
         {
             auto headerSize = sizeof(uint32_t);
@@ -122,11 +128,13 @@ public:
             std::vector<uint8_t> tmp;
             sock.recv(tmp, headerSize);
             remainSize = *reinterpret_cast<int*>(tmp.data());
+            remainSize -= headerSize;
+            recvBuff.resize(remainSize);
         }
         else
-        {
-            auto n = sock.recv(recvBuff.data() + recvBuff.size(), remainSize);
-            
+        {   // auto n = sock.recv(recvBuff.data() + recvOffset, remainSize);
+            // or recvAppend?
+            auto n = sock.recv(recvBuff.data(), remainSize);
             remainSize -= n;
             if (remainSize <= 0) {
                 onRecvCommand();

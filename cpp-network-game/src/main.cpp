@@ -16,12 +16,13 @@ int main(int argc, const char * argv[]) {
 //    MyTest::testPlayer();
 //    MyTest::testInt();
 //    MyTest::testGameMaxId();
-    
-    
-    
-    
-    
-    
+//    MyTest::testMakePlayerPacket();
+//    
+//    
+//    
+//    
+//    
+//    
 //    return 0;
     Game game;
     if (argc >= 2 && strcmp(argv[1], "--host") == 0) {

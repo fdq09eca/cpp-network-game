@@ -9,6 +9,41 @@
 #include "Game.hpp"
 #include "Player.hpp"
 
+void MyTest::testMakePlayerPacket(){
+    Player p;
+    p.color = {0, 255, 0};
+    
+    // set pos;
+    p.pos.x = 5;
+    p.pos.y = 5;
+    
+    
+//     send connected player hello packet
+    std::vector<uint8_t> tmp;
+    Packet::make_PlayerPacket(p, MyCommand::INIT_PLAYER, tmp);
+    int size = -1;
+    int iCmd = -1;
+    uint8_t* src = tmp.data();
+    uint8_t* dst = src + tmp.size();
+    src = MyDeserialiser::de_Int(size, src, dst);
+    src = MyDeserialiser::de_Int(iCmd, src, dst);
+    
+    Player q;
+    src = MyDeserialiser::de_Player(q, src, dst);
+    
+    MyCommand cmd = static_cast<MyCommand>(iCmd);
+    TEST(cmd == MyCommand::INIT_PLAYER);
+    
+    TEST(p.color.r == q.color.r);
+    TEST(p.color.g == q.color.g);
+    TEST(p.color.b == q.color.b);
+    TEST(p.color.a == q.color.a);
+    
+    TEST(p.pos.x == q.pos.x);
+    TEST(p.pos.y == q.pos.y);
+
+}
+
 void MyTest::testGetPlayerById() {
     Game g;
     auto& p = g.players.emplace_back(new Player);

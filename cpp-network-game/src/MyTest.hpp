@@ -17,6 +17,8 @@ public:
     
     static void testInt();
     
+    static void testMakePlayerPacket();
+    
     static void testGameMaxId();
     
     static void testGetPlayerById();

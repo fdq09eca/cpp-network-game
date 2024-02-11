@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F576055D2B58473C0049E44B"
-               BuildableName = "sdl2"
-               BlueprintName = "sdl2"
-               ReferencedContainer = "container:sdl2.xcodeproj">
+               BlueprintIdentifier = "F553AB962B76E60300CFB089"
+               BuildableName = "cpp-network-game"
+               BlueprintName = "cpp-network-game"
+               ReferencedContainer = "container:cpp-network-game.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,16 +44,16 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F576055D2B58473C0049E44B"
-            BuildableName = "sdl2"
-            BlueprintName = "sdl2"
-            ReferencedContainer = "container:sdl2.xcodeproj">
+            BlueprintIdentifier = "F553AB962B76E60300CFB089"
+            BuildableName = "cpp-network-game"
+            BlueprintName = "cpp-network-game"
+            ReferencedContainer = "container:cpp-network-game.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
             argument = "--host"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
@@ -67,10 +67,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F576055D2B58473C0049E44B"
-            BuildableName = "sdl2"
-            BlueprintName = "sdl2"
-            ReferencedContainer = "container:sdl2.xcodeproj">
+            BlueprintIdentifier = "F553AB962B76E60300CFB089"
+            BuildableName = "cpp-network-game"
+            BlueprintName = "cpp-network-game"
+            ReferencedContainer = "container:cpp-network-game.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

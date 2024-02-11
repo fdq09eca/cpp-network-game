@@ -53,8 +53,7 @@ void Game::boardcast(Player& p) {
     Packet::make_PlayerPacket(p, MyCommand::UPDATE_PLAYER, tmp);
     
     for (auto& q : players) {
-        if (q->isHost)
-            continue;
+        if (!q->sock.isValid()) continue;
         q->send(tmp);
     }
 }
@@ -67,9 +66,7 @@ Player* Game::getPlayerById(int id) {
 }
 
 void Game::onUpdateNetwork(){
-    
     MyFdSet fdSet;
-    
     fdSet.addRead(listenSock);
     
     for (auto& p : players) {
@@ -77,12 +74,13 @@ void Game::onUpdateNetwork(){
         if (!p->sock.isValid()) continue;
         
         
-        if (!p->sendBuff.empty()) {
+        if (p->canSend()) {
             fdSet.addWrite(p->sock);
-        } else {
-            fdSet.addRead(p->sock);
         }
         
+        if (p->canRead()) {
+            fdSet.addRead(p->sock);
+        }
     }
     
     
@@ -90,12 +88,11 @@ void Game::onUpdateNetwork(){
     if (n <= 0) return;
     
     if (fdSet.hasRead(listenSock)) {
-        
         auto p = std::make_unique<Player>();
         listenSock.accept(p->sock);
         auto& b = players.emplace_back(std::move(p));
         b->onConnect(*this);
-        boardcast(*b);
+//        boardcast(*b);
     }
     
     for (auto& p : players) {
@@ -105,6 +102,7 @@ void Game::onUpdateNetwork(){
         if (fdSet.hasRead(p->sock)) {
             p->onRecv();
         }
+        
         if (fdSet.hasWrite(p->sock)) {
             fmt::print("\nplayer {} onSend.\n", fmt::ptr(p.get()));
             fmt::print("p->sendBuff.size() = {}\n", p->sendBuff.size());
@@ -129,7 +127,10 @@ void Game::run(){
             delta = endTime - startTime; // how many ms for a frame
         }
         
+        
+        // host;
         onUpdateNetwork();
+    
         
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
