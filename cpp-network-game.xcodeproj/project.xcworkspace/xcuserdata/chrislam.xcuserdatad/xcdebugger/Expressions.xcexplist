@@ -11,6 +11,9 @@
             <PersistentString
                value = "recvBuff">
             </PersistentString>
+            <PersistentString
+               value = "*reinterpret_cast&lt;int*&gt;(tmp.data())">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
    </ContextStates>

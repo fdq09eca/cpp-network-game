@@ -56,6 +56,11 @@ public:
     }
     
     void operator=(MySocket&& rhs){
+        if (this == &rhs){
+            MY_ASSERT(false);
+            return;
+        }
+        close();
         _sock = rhs._sock;
         rhs._sock = INVALID_SOCKET;
     }
@@ -147,13 +152,22 @@ public:
     };
     
     size_t recv(std::vector<uint8_t>& outBuff, size_t dataSize) {
-        outBuff.resize(dataSize);
-        uint8_t* p = outBuff.data();
+        return recvAppend(outBuff, dataSize);
+    }
+    
+    size_t recvAppend(std::vector<uint8_t>& outBuff, size_t dataSize) {
+        auto oldSize = outBuff.size();
+        auto newSize = oldSize + dataSize;
+        outBuff.resize(newSize);
+        auto* p = outBuff.data() + oldSize;
         return recv(p, dataSize);
     }
     
     size_t recv(uint8_t* outBuff, size_t dataSize) {
+        MY_ASSERT(outBuff != nullptr);
+        
         auto n = ::recv(_sock, outBuff, dataSize, 0);
+        
         if (n < 0) { throw MyError("recv"); }
         std::string s;
         s.assign(outBuff, outBuff + dataSize);
@@ -191,23 +205,25 @@ public:
     bool hasWrite(const MySocket& s) { return FD_ISSET(s.sock(), &writeSet); }
     bool hasError(const MySocket& s) { return FD_ISSET(s.sock(), &errorSet); }
     
-    inline void updateMaxFd(const MySocket& s){
+    inline void updateMaxFd(MySocket& s){
         if (s.sock() > max_fd) {
             max_fd = s.sock();
         }
     }
     
-    inline void addRead(const MySocket& s) {
+    inline void addRead(MySocket& s) {
+        MY_ASSERT(s.isValid());
         FD_SET(s.sock(), &readSet);
         updateMaxFd(s);
     }
     
-    inline void addWrite(const MySocket& s) {
+    inline void addWrite(MySocket& s) {
+        MY_ASSERT(s.isValid());
         FD_SET(s.sock(), &writeSet);
         updateMaxFd(s);
     }
     
-    inline void addReadWrtie(const MySocket& s) {
+    inline void addReadWrtie(MySocket& s) {
         addRead(s);
         addWrite(s);
     }

@@ -36,8 +36,8 @@ std::cout << #X ": " << X << "\n"; \
 } while (false)
 
 inline void my_assert(bool x, const char* msg, int lineNumber, const char* filename) {
-    assert(x);
     if (!x) printf("%s", msg);
+    assert(x);
 }
 
 
@@ -128,7 +128,7 @@ public:
     static void remove_unorder(std::vector<T>& vec, T& item){
         
         if (vec.size() <= 0){            
-            MY_ASSERT(false);
+//            MY_ASSERT(false);
             return;
         }
         

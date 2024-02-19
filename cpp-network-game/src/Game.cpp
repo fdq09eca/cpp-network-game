@@ -10,6 +10,13 @@
 
 Game* Game::_instance = nullptr;
 
+Game::Game() {
+    assert(_instance == nullptr);
+    _instance = this;
+}
+
+Game::~Game() { _instance = nullptr; }
+
 void Game::onInit(){
     
     if (SDL_Init(SDL_INIT_VIDEO) != 0
@@ -47,15 +54,26 @@ int Game::getNewPlayerId() {
 
 }
 
-void Game::boardcast(Player& p) {
-    std::vector<uint8_t> tmp;
-    tmp.clear();
-    Packet::make_PlayerPacket(p, MyCommand::UPDATE_PLAYER, tmp);
-    
-    for (auto& q : players) {
-        if (!q->sock.isValid()) continue;
-        q->send(tmp);
+void Game::boardcast(Player& srcPlayer, std::vector<uint8_t> msg) {
+    if (!listenSock.isValid()) return;
+    fmt::print("\n>> boardcast!!\n");
+    for (auto& p : players) {
+        if (!p->sock.isValid()) continue;
+        if (p.get() == &srcPlayer) continue;
+        p->send(msg);
     }
+}
+
+Player* Game::addPlayer(std::unique_ptr<Player>&& np) {
+    auto& b = players_newAdded.emplace_back(std::move(np));
+    return b.get();
+}
+
+void Game::removePlayer(Player* p){
+    players_pendingRemove.emplace_back(p);
+    std::vector<uint8_t> msg;
+    Packet::make_PlayerPacket(*p, MyCommand::REMOVE_PLAYER, msg);
+    boardcast(*p, msg);
 }
 
 Player* Game::getPlayerById(int id) {
@@ -67,11 +85,32 @@ Player* Game::getPlayerById(int id) {
 
 void Game::onUpdateNetwork(){
     MyFdSet fdSet;
-    fdSet.addRead(listenSock);
+    if (listenSock.isValid()) {
+        fdSet.addRead(listenSock);
+    }
+    
+    // add and remove players
+    for (auto& np : players_newAdded) {
+        players.emplace_back(std::move(np));
+    }
+    
+    for (auto* rp : players_pendingRemove) {
+        players.erase(std::remove_if(players.begin(),
+                                    players.end(),
+                                     [rp](const auto& q) { return q.get() == rp; }),
+                     players.end());
+    }
+    
+    
+    players_newAdded.clear();
+    players_pendingRemove.clear();
+    
     
     for (auto& p : players) {
-        if (!p) continue;
-        if (!p->sock.isValid()) continue;
+        if (!p)
+            continue;
+        if (!p->sock.isValid())
+            continue;
         
         
         if (p->canSend()) {
@@ -91,8 +130,12 @@ void Game::onUpdateNetwork(){
         auto p = std::make_unique<Player>();
         listenSock.accept(p->sock);
         auto& b = players.emplace_back(std::move(p));
+        
         b->onConnect(*this);
-//        boardcast(*b);
+        
+        std::vector<uint8_t> msg;
+        Packet::make_PlayerPacket(*b, MyCommand::UPDATE_PLAYER, msg);
+        boardcast(*b, msg);
     }
     
     for (auto& p : players) {
@@ -106,6 +149,7 @@ void Game::onUpdateNetwork(){
         if (fdSet.hasWrite(p->sock)) {
             fmt::print("\nplayer {} onSend.\n", fmt::ptr(p.get()));
             fmt::print("p->sendBuff.size() = {}\n", p->sendBuff.size());
+            
             for (auto& c : p->sendBuff) {
                 printf("%c", c);
             }
@@ -158,7 +202,7 @@ void Game::run(){
     
     
     
-    if (renderer)   { SDL_DestroyRenderer(renderer);    }
+    if (renderer)   {   SDL_DestroyRenderer(renderer);    }
     if (window)     {   SDL_DestroyWindow(window);      }
     SDL_Quit();
 }

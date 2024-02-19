@@ -11,9 +11,7 @@
 		F56052DE2B79850300017072 /* MySocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052CB2B79850300017072 /* MySocket.cpp */; };
 		F56052DF2B79850300017072 /* MySerialiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052CC2B79850300017072 /* MySerialiser.cpp */; };
 		F56052E02B79850300017072 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052CD2B79850300017072 /* main.cpp */; };
-		F56052E12B79850300017072 /* MyPacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052D02B79850300017072 /* MyPacket.cpp */; };
 		F56052E22B79850300017072 /* MyCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052D42B79850300017072 /* MyCommon.cpp */; };
-		F56052E32B79850300017072 /* MyGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052D52B79850300017072 /* MyGameObject.cpp */; };
 		F56052E42B79850300017072 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052D72B79850300017072 /* Player.cpp */; };
 		F56052E52B79850300017072 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052DA2B79850300017072 /* Game.cpp */; };
 		F56052E62B79850300017072 /* MyTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F56052DB2B79850300017072 /* MyTest.cpp */; };
@@ -52,16 +50,12 @@
 		F56052CC2B79850300017072 /* MySerialiser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MySerialiser.cpp; sourceTree = "<group>"; };
 		F56052CD2B79850300017072 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F56052CE2B79850300017072 /* MySerialiser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MySerialiser.hpp; sourceTree = "<group>"; };
-		F56052CF2B79850300017072 /* MyGameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyGameObject.hpp; sourceTree = "<group>"; };
-		F56052D02B79850300017072 /* MyPacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyPacket.cpp; sourceTree = "<group>"; };
 		F56052D12B79850300017072 /* MyCommon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyCommon.hpp; sourceTree = "<group>"; };
 		F56052D22B79850300017072 /* MySocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MySocket.hpp; sourceTree = "<group>"; };
 		F56052D32B79850300017072 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		F56052D42B79850300017072 /* MyCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyCommon.cpp; sourceTree = "<group>"; };
-		F56052D52B79850300017072 /* MyGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyGameObject.cpp; sourceTree = "<group>"; };
 		F56052D62B79850300017072 /* MyUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyUtil.hpp; sourceTree = "<group>"; };
 		F56052D72B79850300017072 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
-		F56052D82B79850300017072 /* MyPacket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MyPacket.hpp; sourceTree = "<group>"; };
 		F56052D92B79850300017072 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		F56052DA2B79850300017072 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		F56052DB2B79850300017072 /* MyTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyTest.cpp; sourceTree = "<group>"; };
@@ -149,10 +143,6 @@
 				F56052CD2B79850300017072 /* main.cpp */,
 				F56052D42B79850300017072 /* MyCommon.cpp */,
 				F56052D12B79850300017072 /* MyCommon.hpp */,
-				F56052D52B79850300017072 /* MyGameObject.cpp */,
-				F56052CF2B79850300017072 /* MyGameObject.hpp */,
-				F56052D02B79850300017072 /* MyPacket.cpp */,
-				F56052D82B79850300017072 /* MyPacket.hpp */,
 				F56052CC2B79850300017072 /* MySerialiser.cpp */,
 				F56052CE2B79850300017072 /* MySerialiser.hpp */,
 				F56052CB2B79850300017072 /* MySocket.cpp */,
@@ -226,12 +216,10 @@
 			files = (
 				F56052E52B79850300017072 /* Game.cpp in Sources */,
 				F56052E42B79850300017072 /* Player.cpp in Sources */,
-				F56052E32B79850300017072 /* MyGameObject.cpp in Sources */,
 				F56052E62B79850300017072 /* MyTest.cpp in Sources */,
 				F56052E22B79850300017072 /* MyCommon.cpp in Sources */,
 				F56052DE2B79850300017072 /* MySocket.cpp in Sources */,
 				F56052DD2B79850300017072 /* MyUtil.cpp in Sources */,
-				F56052E12B79850300017072 /* MyPacket.cpp in Sources */,
 				F56052E02B79850300017072 /* main.cpp in Sources */,
 				F56052DF2B79850300017072 /* MySerialiser.cpp in Sources */,
 			);

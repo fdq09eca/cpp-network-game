@@ -74,10 +74,17 @@ uint8_t* MyDeserialiser::de_Player(Player& o, uint8_t* p, uint8_t* e) {
     return p;
 }
 
-void Packet::make_PlayerPacket(Player &p, MyCommand cmd, std::vector<uint8_t> &buff) {
+void Packet::make_PlayerPacket(Player& p, MyCommand cmd, std::vector<uint8_t> &buff) {
        MySerialiser::se_Int(0, buff);
        MySerialiser::se_Int((int) cmd, buff);
        MySerialiser::se_Player(p, buff);
+       *reinterpret_cast<int*>(buff.data()) = static_cast<int>(buff.size());
+}
+
+void Packet::make_UpdatePosPacket(Point& pos, MyCommand cmd, std::vector<uint8_t> &buff) {
+       MySerialiser::se_Int(0, buff);
+       MySerialiser::se_Int((int) cmd, buff);
+       MySerialiser::se_Position(pos, buff);
        *reinterpret_cast<int*>(buff.data()) = static_cast<int>(buff.size());
 }
 

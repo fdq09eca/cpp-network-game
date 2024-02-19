@@ -13,6 +13,7 @@
 
 
 struct Point {
+    
     int x = 0; int y = 0;
     Point() = default;
     Point(int x_, int y_): x(x_), y(y_){};

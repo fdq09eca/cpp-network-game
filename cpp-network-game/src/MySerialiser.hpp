@@ -15,9 +15,6 @@ class Player;
 enum class MyCommand;
 class Game;
 
-
-
-
 class MySerialiser {
 public:
     static void se_Int(int v, std::vector<uint8_t>& buff);
@@ -51,7 +48,8 @@ class Packet {
 public:
     
     static void make_PlayerPacket(Player &p, MyCommand cmd, std::vector<uint8_t> &buff);
-    
+    static void make_UpdatePosPacket(Point& pos, MyCommand cmd, std::vector<uint8_t> &buff);
+
 };
 
 
