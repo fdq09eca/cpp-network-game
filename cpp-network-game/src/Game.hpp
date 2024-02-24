@@ -30,6 +30,8 @@ public:
     
     Player* localPlayer = nullptr;
     
+    bool isHost();
+    
     std::vector<std::unique_ptr<Player>> players;
     
     static const int SCREEN_W = 500;

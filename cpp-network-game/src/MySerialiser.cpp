@@ -81,7 +81,7 @@ void Packet::make_PlayerPacket(Player& p, MyCommand cmd, std::vector<uint8_t> &b
        *reinterpret_cast<int*>(buff.data()) = static_cast<int>(buff.size());
 }
 
-void Packet::make_UpdatePosPacket(Point& pos, MyCommand cmd, std::vector<uint8_t> &buff) {
+void Packet::make_PosPacket(Point& pos, MyCommand cmd, std::vector<uint8_t> &buff) {
        MySerialiser::se_Int(0, buff);
        MySerialiser::se_Int((int) cmd, buff);
        MySerialiser::se_Position(pos, buff);

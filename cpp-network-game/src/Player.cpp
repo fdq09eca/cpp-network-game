@@ -90,12 +90,10 @@ void Player::onRecvCommand() {
                 *np = std::move(tmp);
                 q = Game::Instance()->addPlayer(std::move(np));
             } else {
-
                 size = tmp.size;
                 color = tmp.color;
                 pos = tmp.pos;
                 isHost = tmp.isHost;
-                
             }
             
             MY_ASSERT(q != nullptr);
@@ -127,10 +125,12 @@ void Player::onRecvCommand() {
         } break;
             
         case MyCommand::REMOVE_PLAYER:{
-//            rp_id =
-//            Player* rp = Game::Instance()->getPlayerById(rp_id);
-//            Game::Instance()->removePlayer(rp);
-            MY_ASSERT("\nNOT YET IMPLEMENTED.\n");
+            Player r;
+            MyDeserialiser::de_Player(r, p, e);
+            
+            Player* rp = Game::Instance()->getPlayerById(r.id);
+            MY_ASSERT(rp != nullptr);
+            Game::Instance()->removePlayer(rp);
         } break;
             
             

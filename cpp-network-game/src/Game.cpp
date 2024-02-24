@@ -8,6 +8,10 @@
 #include "Game.hpp"
 #include "Player.hpp"
 
+bool Game::isHost() {
+    return localPlayer->isHost;
+}
+
 Game* Game::_instance = nullptr;
 
 Game::Game() {
@@ -55,7 +59,7 @@ int Game::getNewPlayerId() {
 }
 
 void Game::boardcast(Player& srcPlayer, std::vector<uint8_t> msg) {
-    if (!listenSock.isValid()) return;
+    if (!isHost()) return;
     fmt::print("\n>> boardcast!!\n");
     for (auto& p : players) {
         if (!p->sock.isValid()) continue;
@@ -71,6 +75,7 @@ Player* Game::addPlayer(std::unique_ptr<Player>&& np) {
 
 void Game::removePlayer(Player* p){
     players_pendingRemove.emplace_back(p);
+    if (!isHost()) return;
     std::vector<uint8_t> msg;
     Packet::make_PlayerPacket(*p, MyCommand::REMOVE_PLAYER, msg);
     boardcast(*p, msg);
